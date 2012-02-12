@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="css/style.css" />
+  <title>Todo App</title>
+  
+  <script src="js/underscore.js"></script>
+  <script src="js/jquery.js"></script>
+  <script src="js/backbone.js"></script>
+  <script src="js/todo_app.js"></script>
+</head>
+<body>
+  <h1>Tarefas</h1>
+
+  <div id="todo-app">
+    <form id="new-task" onsubmit="return false">
+      <input type="text" name="name" />
+    </form>
+    
+    <ul id="todo-list">
+      
+    </ul>
+  </div>
+  
+  <!-- Templates -->
+  <script type="text/template" id="task-item-template">
+    <%%= name %>
+  </script>
+</body>
+</html>

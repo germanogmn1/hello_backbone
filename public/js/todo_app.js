@@ -54,8 +54,6 @@ jQuery(function() {
     
     addAll: function(task) {
       this.taskList.each(this.addOne);
-      var view = new Todo.TaskItemView({model: task});
-      $("#todo-list").append(view.render().el);
     }
   });
   

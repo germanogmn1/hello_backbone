@@ -21,7 +21,7 @@ get '/tasks' do
   content_type :json
   
   res = JSON.dump @@data
-  STDOUT.puts "[GET /tasks] #{res}"
+  STDOUT.puts "[GET  /tasks] #{res}"
   res
 end
 
@@ -33,5 +33,16 @@ post '/tasks' do
   task = JSON.parse(body).merge(:id => @@count += 1 )
   @@data << task
   
-  200
+  # respond with the id
+  JSON.dump(task)
+end
+
+put '/tasks/:id' do |id|
+  body = request.body.read
+  
+  STDOUT.puts "[PUT  /tasks/#{id}] #{body}"
+  
+  @@data.find { |task| task[:id] == id.to_i }
+        .update JSON.parse(body)
+  
 end

@@ -16,6 +16,18 @@ jQuery(function() {
     tagName:  "li",
     template: _.template($("#task-item-template").html()),
     
+    events: {
+      "change .done": "toggle"
+    },
+    
+    initialize: function() {
+      this.model.bind('change', this.render, this);
+    },
+    
+    toggle: function(e) {
+      this.model.save({done: e.target.checked});
+    },
+    
     render: function() {
       var rendered = this.template(this.model.toJSON());
       this.$el.html(rendered);

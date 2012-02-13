@@ -19,13 +19,15 @@
     </form>
     
     <ul id="todo-list">
-      
     </ul>
   </div>
   
   <!-- Templates -->
   <script type="text/template" id="task-item-template">
-    <%%= name %>
+    <label <%%= (done) ? 'class="completed"' : '' %>>
+      <input type="checkbox" class="done" <%%= (done) ? 'checked="checked"' : '' %> />
+      <%%= name %>
+    </label>
   </script>
 </body>
 </html>

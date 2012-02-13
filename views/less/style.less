@@ -1,27 +1,33 @@
 body {
   width: 600px;
   margin: 0 auto;
+  font: 16px Palatino, serif;
 }
 
-#tasks {
-  float: left;
-}
-
-#sidebar {
-  width: 200px;
-  float: right;
-  
-  ul {
-    border-left: 1px solid #666;
-    list-style-type: none;
+#new-task {
+  input[type="text"] {
     margin: 0;
-    padding: 0;
+    padding: 10px;
+    border: 1px solid #555;
+    width: 578px;
+    font-size: 22px;
+    font-family: inherit;
+  }
+}
 
-    li {
-      display: block;
-      padding: 0 20px;
-      line-height: 25px;
-    }
+#todo-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 20px 0;
+  
+  li {
+    line-height: 40px;
+    font-size: 22px;
   }
   
+  li .completed {
+    color: #666;
+    font-style: italic;
+    text-decoration: line-through;
+  }
 }

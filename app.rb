@@ -18,10 +18,11 @@ end
 @@count = 0
 
 get '/tasks' do
-  STDOUT.puts "[GET /tasks]"
-  
   content_type :json
-  JSON.dump @@data
+  
+  res = JSON.dump @@data
+  STDOUT.puts "[GET /tasks] #{res}"
+  res
 end
 
 post '/tasks' do

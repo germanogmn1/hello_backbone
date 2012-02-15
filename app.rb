@@ -6,7 +6,7 @@ set :server, :thin
 root_id = self.object_id
 
 get '/' do
-  erb :index, locals: {id: root_id}
+  erb :index
 end
 
 get '/css/*.css' do |path|
@@ -42,7 +42,5 @@ put '/tasks/:id' do |id|
   
   STDOUT.puts "[PUT  /tasks/#{id}] #{body}"
   
-  @@data.find { |task| task[:id] == id.to_i }
-        .update JSON.parse(body)
-  
+  @@data.find { |task| task[:id] == id.to_i }.update(JSON.parse(body))
 end

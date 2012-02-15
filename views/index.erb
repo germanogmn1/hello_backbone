@@ -9,17 +9,21 @@
   <script src="js/jquery.js"></script>
   <script src="js/backbone.js"></script>
   <script src="js/todo_app.js"></script>
+  <script>
+    jQuery(function() {
+      Todo.init();
+    });
+  </script>
 </head>
 <body>
   <h1>Tarefas</h1>
 
   <div id="todo-app">
-    <form id="new-task" onsubmit="return false">
+    <form id="new-task">
       <input type="text" name="name" />
     </form>
     
-    <ul id="todo-list">
-    </ul>
+    <ul id="todo-list"></ul>
   </div>
   
   <!-- Templates -->

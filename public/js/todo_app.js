@@ -28,12 +28,14 @@ Todo.TaskItemView = Backbone.View.extend({
   tagName:  "li",
   
   events: {
-    'change input[type="checkbox"]': "toggle"
+    'change input[type="checkbox"]': "toggle",
+    "click .destroy": "destroy"
   },
   
   initialize: function() {
     this.template = _.template($("#task-item-template").html());
     this.model.bind('change', this.render, this);
+    this.model.bind('remove', this.remove, this);
   },
   
   render: function() {
@@ -42,8 +44,18 @@ Todo.TaskItemView = Backbone.View.extend({
     return this;
   },
   
+  remove: function() {
+    this.$el
+      .css("background-color", "#ffcccc")
+      .animate({opacity: 0}, 500, function(){ $(this).remove(); });
+  },
+  
   toggle: function(e) {
     this.model.save({done: e.target.checked});
+  },
+  
+  destroy: function(e) {
+    this.model.destroy();
   }
 });
 

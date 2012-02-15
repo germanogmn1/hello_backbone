@@ -25,7 +25,7 @@ Todo.TaskListCollection = Backbone.Collection.extend({
 });
 
 Todo.TaskItemView = Backbone.View.extend({
-  tagName:  "li",
+  tagName: "li",
   
   events: {
     'change input[type="checkbox"]': "toggle",
@@ -73,6 +73,11 @@ Todo.AppView = Backbone.View.extend({
     this.taskList.on('reset', this.renderAll, this);
     
     this.taskList.fetch();
+    
+    $("#todo-list").sortable({
+      axis: 'y',
+      update: function() {}
+    });
   },
   
   createTask: function() {

@@ -29,7 +29,7 @@
   <!-- Templates -->
   <script type="text/template" id="task-item-template">
     <label <%%= (done) ? 'class="completed"' : '' %>>
-      <input type="checkbox" class="done" <%%= (done) ? 'checked="checked"' : '' %> />
+      <input type="checkbox" <%%= (done) ? 'checked="checked"' : '' %> />
       <%%= name %>
     </label>
   </script>

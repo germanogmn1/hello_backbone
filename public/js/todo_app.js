@@ -1,12 +1,21 @@
 window.Todo = Todo = {
   init: function() {
-    new Todo.AppView();
+    this.appView = new Todo.AppView();
   }
 }
 
 Todo.Task = Backbone.Model.extend({
   defaults: {
     done: false
+  },
+  
+  validate: function(attrs) {
+    var strip = function(str) {
+      return str.replace(/^\s+/, '').replace(/\s+$/, '');
+    };
+    if (!attrs.name || !strip(attrs.name).length) {
+      return true;
+    }
   }
 });
 

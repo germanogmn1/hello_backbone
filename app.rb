@@ -14,14 +14,14 @@ get '/css/*.css' do |path|
   less :"less/#{path}"
 end
 
-@@data = []
-@@count = 0
+task_list = []
+last_id = 0
 
 get '/tasks' do
   STDOUT.puts "[GET /tasks]"
   
   content_type :json
-  JSON.dump @@data
+  JSON.dump task_list
 end
 
 post '/tasks' do
@@ -29,8 +29,8 @@ post '/tasks' do
   
   STDOUT.puts "[POST /tasks] #{body}"
   
-  task = JSON.parse(body).merge(:id => @@count += 1 )
-  @@data << task
+  task = JSON.parse(body).merge(id: last_id += 1)
+  task_list << task
   
   # respond with the id
   content_type :json
@@ -42,11 +42,12 @@ put '/tasks/:id' do |id|
   
   STDOUT.puts "[PUT /tasks/#{id}] #{body}"
   
-  @@data.find { |task| task[:id] == id.to_i }.update(JSON.parse(body))
+  task_list.find { |task| task[:id] == id.to_i }.update(JSON.parse(body))
 end
 
 delete '/tasks/:id' do |id|
   STDOUT.puts "[DELETE /tasks/#{id}]"
   
-  @@data.delete_if { |task| task[:id] == id.to_i }
+  task_list.delete_if { |task| task[:id] == id.to_i }
+  200
 end

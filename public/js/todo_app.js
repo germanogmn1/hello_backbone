@@ -21,7 +21,17 @@ Todo.Task = Backbone.Model.extend({
 
 Todo.TaskListCollection = Backbone.Collection.extend({
   model: Todo.Task,
-  url: "/tasks"
+  url: "/tasks",
+  
+  comparator: function(task) {
+    return task.get("order");
+  },
+  
+  updateOrder: function(ids) {
+    _.each(ids, function(id, pos) {
+      this.get(id).save({order: pos});
+    }, this);
+  }
 });
 
 Todo.TaskItemView = Backbone.View.extend({
@@ -40,7 +50,7 @@ Todo.TaskItemView = Backbone.View.extend({
   
   render: function() {
     var rendered = this.template(this.model.toJSON());
-    this.$el.html(rendered);
+    this.$el.html(rendered).data("id", this.model.id);
     return this;
   },
   
@@ -76,7 +86,7 @@ Todo.AppView = Backbone.View.extend({
     
     $("#todo-list").sortable({
       axis: 'y',
-      update: function() {}
+      update: _.bind(this.updateOrder, this)
     });
   },
   
@@ -85,6 +95,11 @@ Todo.AppView = Backbone.View.extend({
     this.taskList.create({name: taskName});
     this.$('#new-task')[0].reset();
     return false;
+  },
+  
+  updateOrder: function() {
+    var sort = $("#todo-list li").map(function(){ return $(this).data("id") });
+    this.taskList.updateOrder(sort);
   },
   
   renderOne: function(task) {

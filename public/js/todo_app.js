@@ -86,7 +86,8 @@ Todo.AppView = Backbone.View.extend({
     
     $("#todo-list").sortable({
       axis: 'y',
-      update: _.bind(this.updateOrder, this)
+      update: _.bind(this.updateOrder, this),
+      handle: '.drag'
     });
   },
   
